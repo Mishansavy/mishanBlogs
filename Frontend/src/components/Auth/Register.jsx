@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { redirect } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +17,7 @@ const Register = () => {
       })
       .then((response) => {
         console.log(response.data);
+        redirect("/login");
       })
       .catch((error) => {
         console.log(error);

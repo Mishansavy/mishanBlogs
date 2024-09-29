@@ -1,8 +1,8 @@
 <?php
 // Allow cross-origin requests from the frontend
-header("Access-Control-Allow-Origin: http://localhost:5173"); 
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Origin: http://localhost:5173");
+// header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: http://localhost:5173");
 
 // If it's an OPTIONS request, return early with a 204 status
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
