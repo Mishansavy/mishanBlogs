@@ -1,4 +1,16 @@
 <?php
+// Allow cross-origin requests from the frontend
+header("Access-Control-Allow-Origin: *"); // Use * to allow all origins, or specify your frontend's URL
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// If it's an OPTIONS request, return early (for preflight requests)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
+
 require 'config/Database.php';
 
 $db = new Database();
