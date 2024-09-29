@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,16 +16,23 @@ const Login = () => {
       })
       .then((response) => {
         console.log(response.data);
-        // Store JWT in localStorage or cookies if you plan to use tokens
+        if (response.data.message === "Login successful") {
+          // Store user data in localStorage (you can also store only user ID if preferred)
+          localStorage.setItem("admin", JSON.stringify(response.data.user));
+          navigate("/admin/dashboard"); // Redirect to admin dashboard
+        } else {
+          alert("Invalid credentials");
+        }
       })
       .catch((error) => {
         console.log(error);
+        alert("Login failed");
       });
   };
 
   return (
     <div className="formDiv">
-      <h2>Login to MishanBlogs</h2>
+      <h2>Admin Login</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -38,9 +47,6 @@ const Login = () => {
           placeholder="Password"
         />
         <button type="submit">Login</button>
-        <Link to={"/register"}>
-          <button>Register</button>
-        </Link>
       </form>
     </div>
   );

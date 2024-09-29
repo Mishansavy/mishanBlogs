@@ -1,10 +1,10 @@
 <?php
 class Database
 {
-    private $host = 'localhost';
+    private $host = 's1314.sgp1.mysecurecloudhost.com';
     private $db_name = 'mishans1_blog_db';
-    private $username = 'blogdb_admin';
-    private $password = 'blog@passAdmin13r5';
+    private $username = 'mishans1_blogdb_';
+    private $password = 'mishan@12blogsdbpass';
     public $conn;
 
     public function getConnection()
