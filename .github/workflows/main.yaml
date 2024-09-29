@@ -18,9 +18,8 @@ jobs:
         uses: actions/checkout@v3
 
         # Change directory to Frontend where package.json exists
-    steps:
       - name: Change Directory to Frontend
-        working-directory: ./Frontend
+        uses: ./Frontend
 
       - name: Install Dependencies 📦
         run: npm install
