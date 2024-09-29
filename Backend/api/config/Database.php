@@ -1,8 +1,8 @@
 <?php
 class Database
 {
-    private $host = 'blog.mishanshah.com.np';
-    private $db_name = 'blog_db';
+    private $host = 'localhost';
+    private $db_name = 'mishans1_blog_db';
     private $username = 'blogdb_admin';
     private $password = 'blog@passAdmin13r5';
     public $conn;

@@ -9,7 +9,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://blog.mishanshah.com.np/backend/api/users.php", {
+      .post("https://blog.mishanshah.com.np/backend/api/register.php", {
         username,
         email,
         password,

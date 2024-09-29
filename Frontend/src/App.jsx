@@ -10,6 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/post/:id" element={<BlogPost />} />
         <Route path="/new" element={<NewPost />} />
       </Routes>
