@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import "./BlogPost.css"; // External CSS for styling
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -14,17 +15,20 @@ const BlogPost = () => {
   }, [id]);
 
   return (
-    <div className="container">
+    <div className="blogpost-container">
       {post ? (
-        <div>
-          <h1>{post.title}</h1>
-          <p>{post.body}</p>
-          <small>
-            By {post.author} on {new Date(post.created_at).toLocaleDateString()}
-          </small>
+        <div className="post-content">
+          <h1 className="post-title">{post.title}</h1>
+          <p className="post-body">{post.body}</p>
+          <div className="post-meta">
+            <small>
+              By <strong>{post.author}</strong> on{" "}
+              {new Date(post.created_at).toLocaleDateString()}
+            </small>
+          </div>
         </div>
       ) : (
-        <p>Loading post...</p>
+        <p className="loading-message">Loading post...</p>
       )}
     </div>
   );

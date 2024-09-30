@@ -29,10 +29,10 @@ import {
 } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Login from "./components/Auth/Login";
-import AdminDashboard from "./components/AdminDashboard";
-import NewPost from "./components/NewPost";
-import BlogList from "./components/BlogList";
-import BlogPost from "./components/BlogPost";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import NewPost from "./components/NewPost/NewPost";
+import BlogList from "./components/BlogList/BlogList";
+import BlogPost from "./components/BlogPost/BlogPost";
 
 // Mock function to check if admin is logged in
 const isAuthenticated = () => {

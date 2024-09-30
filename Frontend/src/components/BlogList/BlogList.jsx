@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import "./BlogList.css"; // External CSS for styling
+import PostDefault from "../../assets/post-default-image.jpg";
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null); // New state for error handling
@@ -20,18 +21,22 @@ const BlogList = () => {
   }, []);
 
   return (
-    <div>
-      {error && <p>{error}</p>} {/* Display error message if exists */}
+    <div className="bloglist-container">
+      {error && <p className="error-message">{error}</p>}{" "}
+      {/* Display error message */}
       {posts.length > 0 ? (
-        posts.map((post) => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-            <small>{post.author}</small>
-          </div>
-        ))
+        <div className="posts-grid">
+          {posts.map((post) => (
+            <div key={post.id} className="post-card">
+              <img src={post.image || PostDefault} alt={post.title} />
+              <h2 className="post-title">{post.title}</h2>
+              <p className="post-body">{post.body.slice(0, 100)}...</p>
+              <small className="post-author">By: {post.author}</small>
+            </div>
+          ))}
+        </div>
       ) : (
-        <p>No posts available</p>
+        !error && <p className="no-posts">No posts available</p>
       )}
     </div>
   );
