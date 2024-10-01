@@ -3,12 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Home.css"; // External CSS file for styling
 import PostDefault from "../../assets/post-default-image.jpg";
+import { Header } from "../../components/Header/Header";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1); // Current page state
+  const [totalPages, setTotalPages] = useState(1); // Total pages state
 
   // Fetch blog posts from backend API
   useEffect(() => {
@@ -16,7 +17,9 @@ const Home = () => {
     axios
       .get(`https://blog.mishanshah.com.np/backend/api/posts.php?page=${page}`)
       .then((response) => {
-        setPosts(response.data.posts || []);
+        // Sort posts in descending order by id to show latest posts first
+        const sortedPosts = response.data.posts.sort((a, b) => b.id - a.id);
+        setPosts(sortedPosts || []);
         setTotalPages(response.data.totalPages);
         setLoading(false);
       })
@@ -26,18 +29,24 @@ const Home = () => {
       });
   }, [page]);
 
+  // Pagination handler to go to the next page
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
+  // Pagination handler to go to the previous page
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
   return (
     <div className="home-container">
       <header className="header">
-        <h1 className="logo">Mishan Tech Blog</h1>
-        <nav className="nav-links">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-          <Link to="https://mishanshah.com.np" className="nav-link">
-            About Me
-          </Link>
-        </nav>
+        <Header />
       </header>
 
       <div className="hero-section">
@@ -61,23 +70,49 @@ const Home = () => {
           ) : posts.length > 0 ? (
             posts.map((post) => (
               <div key={post.id} className="blog-card">
-                <img src={post.image || PostDefault} alt={post.title} />
+                <img
+                  src={
+                    post.img && post.img.trim() !== ""
+                      ? `https://blog.mishanshah.com.np/backend/${post.img}`
+                      : PostDefault
+                  }
+                  alt={post.title}
+                />
                 <div className="blog-info">
                   <Link to={`/blog/${post.id}`} className="blog-title">
                     {post.title}
                   </Link>
-                  <p className="blog-excerpt">
-                    {post.body.slice(0, 100)}...
-                    <Link to={`/blog/${post.id}`} className="read-more">
-                      Read more
-                    </Link>
-                  </p>
+                  <p className="blog-excerpt">{post.body.slice(0, 100)}...</p>
+                  <Link to={`/blog/${post.id}`} className="read-more">
+                    Read more
+                  </Link>
                 </div>
               </div>
             ))
           ) : (
             <p>No posts found.</p>
           )}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="pagination">
+          <button
+            className="prev-button"
+            onClick={handlePrevPage}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+          <span className="page-info">
+            Page {page} of {totalPages}
+          </span>
+          <button
+            className="next-button"
+            onClick={handleNextPage}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
 

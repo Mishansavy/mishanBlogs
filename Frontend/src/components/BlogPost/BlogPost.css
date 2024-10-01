@@ -14,8 +14,9 @@
 
 /* Post Title */
 .post-title {
-  font-size: 2.5rem;
-  color: #007bff;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #000000;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -25,13 +26,13 @@
   font-size: 1.1rem;
   line-height: 1.7;
   margin-bottom: 30px;
-  color: #555;
+  color: #000000;
 }
 
 /* Post Metadata */
 .post-meta {
   font-size: 0.9rem;
-  color: #888;
+  color: #000000;
   text-align: right;
   margin-top: 20px;
 }

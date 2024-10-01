@@ -38,8 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $data->title;
     $body = $data->body;
     $author = $data->author;
+    $img = $data->img;
 
-    $sql = "INSERT INTO posts (title, body, author) VALUES ('$title', '$body', '$author')";
+    $sql = "INSERT INTO posts (title, body, author, img) VALUES ('$title', '$body', '$author', '$img')";
     if ($conn->query($sql)) {
         echo json_encode(["message" => "Post created"]);
     } else {
